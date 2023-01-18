@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>品牌列表案例</title>
+</head>
+<body>
+<div id="app">
+    <p>brand：</p>
+    <p><input type="text" v-model.trim="brand">
+        <button @click="add()">add</button>
+    </p>
+    <hr>
+    <table border="1">
+        <tr>
+            <th>#</th>
+            <th>brand</th>
+            <th>status</th>
+            <th>time</th>
+            <th>option</th>
+        </tr>
+        <tr v-for="(item, index) in list" :key="item.id">
+            <td>{{index+1}}</td>
+            <td>{{item.name}}</td>
+            <td><input type="checkbox" v-model="item.status">{{item.status ? '已激活' : '未激活'}}</td>
+            <td>{{item.time}}</td>
+            <td><a href="javascript:;" @click="remove(item.id)">删除</a></td>
+        </tr>
+    </table>
+</div>
+
+<script src="../lib/vue-2.6.12.js"></script>
+<script src="../lib/dayjs.min.js"></script>
+<script>
+  const vm = new Vue({
+    el: '#app',
+    data: {
+      brand: '',
+      nextId: 3,
+      list: [
+        {id: 0, name: '苹果', status: true, time: new Date()},
+        {id: 1, name: '三星', status: false, time: new Date()},
+        {id: 2, name: '华为', status: true, time: new Date()},
+      ]
+    },
+    methods: {
+      add() {
+        if (this.brand === '') {
+          alert('品牌不能为空')
+          return
+        }
+        const obj = {
+          id: this.nextId,
+          name: this.brand,
+          status: true,
+          time: new Date(),
+        }
+        this.list.push(obj)
+        this.nextId++
+        this.brand = ''
+      },
+      remove(id) {
+        this.list = this.list.filter(item => item.id !== id)
+      }
+    }
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+<!-- 希望 Vue 能够控制下面的这个 div，帮我们在把数据填充到 div 内部 -->
+<div id="app">
+  <p v-text="username"></p>
+  <p v-text="gender">性别：</p>
+
+  <hr>
+  <!--vue 提供的 {{ }} 语法，专门用来解决 v-text 会覆盖默认文本内容的问题。这种 {{ }} 语法的专业名称是插值表达
+  式（英文名为：Mustache）-->
+  <p>姓名：{{ username }}</p>
+  <p>性别：{{ gender }}</p>
+
+  <hr>
+
+  <div v-text="info"></div>
+  <div>{{ info }}</div>
+  <!--v-text 指令和插值表达式只能渲染纯文本内容。如果要把包含 HTML 标签的字符串渲染为页面的 HTML 元素，
+  则需要用到 v-html 这个指令-->
+  <div v-html="info"></div>
+</div>
+
+<!-- 1. 导入 Vue 的库文件，在 window 全局就有了 Vue 这个构造函数 -->
+<script src="./lib/vue-2.6.12.js"></script>
+<!-- 2. 创建 Vue 的实例对象 -->
+<script>
+  // 创建 Vue 的实例对象
+  const vm = new Vue({
+    // el 属性是固定的写法，表示当前 vm 实例要控制页面上的哪个区域，接收的值是一个选择器
+    el: '#app',
+    // data 对象就是要渲染到页面上的数据
+    data: {
+      username: 'zhangsan',
+      gender: '女',
+      info: '<h4 style="color: red; font-weight: bold;">欢迎大家来学习 vue.js</h4>'
+    }
+  })
+</script>
+</body>
+
+</html>
