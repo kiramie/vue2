@@ -9,6 +9,8 @@
       <!--<Mid></Mid>-->
       <Right></Right>
     </div>
+    <button @click="flag = !flag">Toggle Flag</button>
+    <Test info="你好" v-if="flag"></Test>
   </div>
 </template>
 
@@ -16,12 +18,19 @@
 import Left from "@/components/Left";
 import Mid from "@/components/Mid";
 import Right from "@/components/Right";
+import Test from "@/components/Test";
 
 export default {
   components: {
     Left,
     Mid,
     Right,
+    Test,
+  },
+  data() {
+    return {
+      flag: true
+    }
   }
 }
 </script>
