@@ -5,8 +5,8 @@
     <!-- 循环渲染每一个商品的信息 -->
     <Goods
         v-for="item in list"
-        :key="item.id"
-        :id="item.id"
+        :key="item.goods_id"
+        :id="item.goods_id"
         :title="item.goods_name"
         :pic="item.goods_img"
         :price="item.goods_price"
@@ -66,7 +66,7 @@ export default {
     // 封装请求列表数据的方法
     async initCartList() {
       // 调用 axios 的 get 方法，请求列表数据
-      const {data: res} = await axios.get('https://www.escook.cn/api/cart')
+      const {data: res} = await axios.get('https://applet-base-api-t.itheima.net/api/cart')
       // 只要请求回来的数据，在页面渲染期间要用到，则必须转存到 data 中
       if (res.status === 200) {
         this.list = res.list
